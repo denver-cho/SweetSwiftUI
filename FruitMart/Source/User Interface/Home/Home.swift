@@ -10,7 +10,11 @@ import SwiftUI
 
 struct Home: View {
   var body: some View {
-    Text("Hello, World!")
+    VStack {
+        ProductRow(product: productSamples[0])
+        ProductRow(product: productSamples[1])
+        ProductRow(product: productSamples[2])
+    }
   }
 }
 
