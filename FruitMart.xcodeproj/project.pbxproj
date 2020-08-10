@@ -17,6 +17,8 @@
 		63636B0A24D6C498005A1FEE /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636B0924D6C498005A1FEE /* ProductRow.swift */; };
 		63636B0D24D6C6DB005A1FEE /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636B0C24D6C6DB005A1FEE /* ColorExtension.swift */; };
 		63636B0F24D6C893005A1FEE /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636B0E24D6C893005A1FEE /* Product.swift */; };
+		63636B1424E180AF005A1FEE /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636B1324E180AF005A1FEE /* BundleExtension.swift */; };
+		63636B1624E18183005A1FEE /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63636B1524E18183005A1FEE /* Store.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		63636B0924D6C498005A1FEE /* ProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRow.swift; sourceTree = "<group>"; };
 		63636B0C24D6C6DB005A1FEE /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		63636B0E24D6C893005A1FEE /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Product.swift; path = FruitMart/Source/Helper/Extension/Product.swift; sourceTree = SOURCE_ROOT; };
+		63636B1324E180AF005A1FEE /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
+		63636B1524E18183005A1FEE /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Store.swift; path = FruitMart/Source/Helper/Extension/Store.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				63636B0E24D6C893005A1FEE /* Product.swift */,
+				63636B1524E18183005A1FEE /* Store.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				63636B0C24D6C6DB005A1FEE /* ColorExtension.swift */,
+				63636B1324E180AF005A1FEE /* BundleExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -234,6 +240,8 @@
 				63636B0A24D6C498005A1FEE /* ProductRow.swift in Sources */,
 				5238EACC240BAC920079E99D /* AppDelegate.swift in Sources */,
 				5238EACE240BAC920079E99D /* SceneDelegate.swift in Sources */,
+				63636B1624E18183005A1FEE /* Store.swift in Sources */,
+				63636B1424E180AF005A1FEE /* BundleExtension.swift in Sources */,
 				5238EAD0240BAC920079E99D /* Home.swift in Sources */,
 				63636B0D24D6C6DB005A1FEE /* ColorExtension.swift in Sources */,
 				63636B0F24D6C893005A1FEE /* Product.swift in Sources */,
