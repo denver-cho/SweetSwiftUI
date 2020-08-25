@@ -9,6 +9,10 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    @State private var quantity: Int = 1
+    @State private var showingAlert: Bool = false
+    @EnvironmentObject private var store: Store
+    
     let product: Product
     
     var body: some View {
@@ -17,6 +21,9 @@ struct ProductDetailView: View {
             orderView
         }
         .edgesIgnoringSafeArea(.top)
+        .alert(isPresented: $showingAlert) {
+            confirmAlert
+        }
     }
 }
 
@@ -52,10 +59,7 @@ extension ProductDetailView {
                     .foregroundColor(.black)
                 Spacer()
                 
-                Image(systemName: "heart")
-                    .imageScale(.large)
-                    .foregroundColor(Color.peach)
-                    .frame(width: 32, height: 32)
+                FavoriteButton(product: product)
             }
             
             Text(splitText(product.description))
@@ -65,11 +69,19 @@ extension ProductDetailView {
     }
     
     var priceInfo: some View {
-        (Text("₩") + Text("\(product.price)").font(.title)).fontWeight(.medium).foregroundColor(.black)
+        let price = quantity * product.price
+        return HStack {
+            (Text("₩") + Text("\(price)").font(.title)).fontWeight(.medium)
+            Spacer()
+            QuantitySelector(quantity: $quantity)
+        }
+        .foregroundColor(.black)
     }
     
     var placeOrderButton: some View {
-        Button(action: { }) {
+        Button(action: {
+            self.showingAlert = true
+        }) {
             Capsule()
                 .fill(Color.peach)
                 .frame(maxWidth: .infinity, minHeight: 30, maxHeight:  55)
@@ -79,23 +91,37 @@ extension ProductDetailView {
                 .padding(.vertical, 8)
         }
     }
-
     
     func splitText(_ text: String) -> String {
-           guard !text.isEmpty else {
-               return text
-           }
-           
-           let centerIdx = text.index(text.startIndex, offsetBy: text.count / 2)
-           let centerSpaceIdx = text[..<centerIdx].lastIndex(of: " ")
-               ?? text[centerIdx...].firstIndex(of: " ")
-               ?? text.index(before: text.endIndex)
-           let afterSpaceIdx = text.index(after: centerSpaceIdx)
-           let lhsString = text[..<afterSpaceIdx].trimmingCharacters(in: .whitespaces)
-           let rhsString = text[afterSpaceIdx...].trimmingCharacters(in: .whitespaces)
-           
-           return String(lhsString + "\n" + rhsString)
+       guard !text.isEmpty else {
+           return text
        }
+       
+       let centerIdx = text.index(text.startIndex, offsetBy: text.count / 2)
+       let centerSpaceIdx = text[..<centerIdx].lastIndex(of: " ")
+           ?? text[centerIdx...].firstIndex(of: " ")
+           ?? text.index(before: text.endIndex)
+       let afterSpaceIdx = text.index(after: centerSpaceIdx)
+       let lhsString = text[..<afterSpaceIdx].trimmingCharacters(in: .whitespaces)
+       let rhsString = text[afterSpaceIdx...].trimmingCharacters(in: .whitespaces)
+       
+       return String(lhsString + "\n" + rhsString)
+    }
+    
+    var confirmAlert: Alert {
+        Alert(
+            title: Text("주문 확인"),
+            message: Text("\(product.name)을(를) \(quantity)개 구매하시겠습니까?"),
+            primaryButton: .default(Text("확인"), action: {
+                self.placeOrder()
+            }),
+            secondaryButton: .cancel(Text("취소"))
+        )
+    }
+    
+    func placeOrder() {
+        store.placeOrder(product: product, quantity: quantity)
+    }
 }
 
 struct ProductDetailView_Previews: PreviewProvider {
