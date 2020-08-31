@@ -11,6 +11,7 @@ import SwiftUI
 struct ProductDetailView: View {
     @State private var quantity: Int = 1
     @State private var showingAlert: Bool = false
+    @State private var showingPopup: Bool = false
     @EnvironmentObject private var store: Store
     
     let product: Product
@@ -20,6 +21,9 @@ struct ProductDetailView: View {
             productImage
             orderView
         }
+        .popup(isPresented: $showingPopup, content: {
+            OrderCompletedMessage()
+        })
         .edgesIgnoringSafeArea(.top)
         .alert(isPresented: $showingAlert) {
             confirmAlert
@@ -29,9 +33,7 @@ struct ProductDetailView: View {
 
 extension ProductDetailView {
     var productImage: some View {
-        Image(self.product.imageName)
-            .resizable()
-            .scaledToFill()
+        ResizedImage(self.product.imageName)
     }
     
     var orderView: some View {
@@ -90,6 +92,7 @@ extension ProductDetailView {
                 .foregroundColor(Color.white)
                 .padding(.vertical, 8)
         }
+        .buttonStyle(ShrinkButtonStyle())
     }
     
     func splitText(_ text: String) -> String {
@@ -121,6 +124,7 @@ extension ProductDetailView {
     
     func placeOrder() {
         store.placeOrder(product: product, quantity: quantity)
+        showingPopup = true
     }
 }
 
